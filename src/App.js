@@ -4,6 +4,7 @@ import { ForceGraph2D, ForceGraph3D, ForceGraphVR, ForceGraphAR } from 'react-fo
 import * as THREE from 'three';
 import classNames from 'classnames';
 import { getImageSize } from 'react-image-size';
+import logo from './assets/logo.svg'
 
 function App() {
 
@@ -50,7 +51,11 @@ function App() {
 
   return (
     <div className="flex flex-col gap-4 h-screen justify-between w-full bg-white">
-      <header className='absolute top-0 left-0 right-0 z-10 flex flex-col gap-4 w-full p-4 bg-white justify-center'><h1 className='text-4xl text-center font-semibold text-slate-900'>Momma Company</h1>
+      <header className='absolute top-0 left-0 right-0 z-10 flex flex-col gap-4 w-full p-4 bg-white justify-center'>
+        <div className='flex flex-row justify-center gap-2 items-center'>
+          <img src={logo} className='h-12 w-12' />
+          <h1 className='text-4xl text-center font-semibold text-slate-900'>Momma Company</h1>
+        </div>
         <div className='px-4 flex flex-row gap-8 justify-center'>
           {dataJson.map((company, index) => <div key={index} onClick={() => setCurrentIndex(index)} className={classNames('cursor-pointer rounded-full bg-slate-300 hover:brightness-110 active:bg-slate-400', currentIndex === index ? 'drop-shadow-[0_0px_5px_#000000]' : '')}>
             {company.holding.image ? <img src={company.holding.image} className='w-16 rounded-full' /> : company.holding.name}
