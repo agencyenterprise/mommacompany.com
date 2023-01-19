@@ -84,6 +84,10 @@ function App() {
         }}
       />}
       {loading && <h1 className='text-center my-auto mx-auto'>Loading...</h1>}
+      <div className='absolute bottom-2 left-2 flex flex-row gap-2 md:gap-8'>
+        <a href="https://wikipedia.org/" target="_blank">Data source</a>
+        <a href='https://github.com/agencyenterprise/mommacompany.com' target="_blank">Contribute</a>
+      </div>
     </div>
   );
 }
