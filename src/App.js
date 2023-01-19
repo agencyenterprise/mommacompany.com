@@ -76,7 +76,7 @@ function App() {
         }}
         linkAutoColorBy={d => data.nodes[d.source].id % GROUPS}
         linkWidth={1}
-        backgroundColor='transparent'
+        backgroundColor='white'
         nodeCanvasObject={(node, ctx, globalScale) => {
           const label = node.name;
           const fontSize = 4;
