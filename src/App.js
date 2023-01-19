@@ -14,15 +14,15 @@ function App() {
     let newData = {
       nodes: [
         {
-          id: 10000, img: `%PUBLIC_URL%${dataJson[currentIndex].holding.image}`, name: dataJson[currentIndex].holding.name, width: 3500, height: 3500
+          id: 10000, img: dataJson[currentIndex].holding.image, name: dataJson[currentIndex].holding.name, width: 3500, height: 3500
         }],
     }
 
     for (let id = 0; id < dataJson[currentIndex].subsidiaries.length; id++) {
       const subsidiary = dataJson[currentIndex].subsidiaries[id];
 
-      const { width, height } = await getImageSize(`%PUBLIC_URL%${subsidiary.image}`);
-      newData.nodes.push({ id: id, img: `%PUBLIC_URL%${subsidiary.image}`, name: subsidiary.name, width, height })
+      const { width, height } = await getImageSize(subsidiary.image);
+      newData.nodes.push({ id: id, img: subsidiary.image, name: subsidiary.name, width, height })
     }
 
     newData.links = [...Array(dataJson[currentIndex].subsidiaries.length).keys()]
@@ -47,7 +47,7 @@ function App() {
       <header className='absolute top-0 left-0 right-0 z-10 flex flex-col gap-4 w-full p-4 bg-white justify-center'><h1 className='text-4xl text-center font-semibold text-slate-900'>Momma Company</h1>
         <div className='px-4 flex flex-row gap-8 justify-center'>
           {dataJson.map((company, index) => <div key={index} onClick={() => setCurrentIndex(index)} className={classNames('cursor-pointer rounded-full bg-slate-300 hover:brightness-110 active:bg-slate-400', currentIndex === index ? 'drop-shadow-[0_0px_5px_#000000]' : '')}>
-            {company.holding.image ? <img src={`%PUBLIC_URL%${company.holding.image}`} className='w-16 rounded-full' /> : company.holding.name}
+            {company.holding.image ? <img src={company.holding.image} className='w-16 rounded-full' /> : company.holding.name}
           </div>)}
         </div></header>
       {data && <ForceGraph3D
