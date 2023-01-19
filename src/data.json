@@ -114,19 +114,5 @@
         "image": "/company_logos/peacetea.png"
       }
     ]
-  },
-  {
-    "holding": {
-      "name": "Nestle",
-      "image": "/company_logos/nestle.png"
-    },
-    "subsidiaries": []
-  },
-  {
-    "holding": {
-      "name": "Pepsico",
-      "image": "/company_logos/pepsico.jpg"
-    },
-    "subsidiaries": []
   }
 ]
