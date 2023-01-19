@@ -9,8 +9,10 @@ function App() {
 
   const [data, setData] = useState();
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [loading, setLoading] = useState(true)
 
   const loadData = async (currentIndex) => {
+    setLoading(true)
     let newData = {
       nodes: [
         {
@@ -36,8 +38,8 @@ function App() {
         target: 10000
       }))
 
-    console.log(newData)
     setData(newData)
+    setLoading(false)
   }
 
   useEffect(() => {
@@ -54,7 +56,7 @@ function App() {
             {company.holding.image ? <img src={company.holding.image} className='w-16 rounded-full' /> : company.holding.name}
           </div>)}
         </div></header>
-      {data && <ForceGraph3D
+      {!loading && <ForceGraph3D
         graphData={data}
         nodeThreeObject={({ img, width, height }) => {
           var imgTexture = new THREE.TextureLoader().load(img);
@@ -81,72 +83,9 @@ function App() {
           ctx.fillText(label, node.x, node.y);
         }}
       />}
+      {loading && <h1 className='text-center my-auto mx-auto'>Loading...</h1>}
     </div>
   );
-}
-
-function getCorrectTextColor(hex) {
-
-  /*
-  From this W3C document: http://www.webmasterworld.com/r.cgi?f=88&d=9769&url=http://www.w3.org/TR/AERT#color-contrast
-  
-  Color brightness is determined by the following formula: 
-  ((Red value X 299) + (Green value X 587) + (Blue value X 114)) / 1000
-  
-  I know this could be more compact, but I think this is easier to read/explain.
-  
-  */
-
-  const threshold = 130; /* about half of 256. Lower threshold equals more dark text on dark background  */
-
-  const hRed = hexToR(hex);
-  const hGreen = hexToG(hex);
-  const hBlue = hexToB(hex);
-
-
-  function hexToR(h) { return parseInt((cutHex(h)).substring(0, 2), 16) }
-  function hexToG(h) { return parseInt((cutHex(h)).substring(2, 4), 16) }
-  function hexToB(h) { return parseInt((cutHex(h)).substring(4, 6), 16) }
-  function cutHex(h) { return (h.charAt(0) == "#") ? h.substring(1, 7) : h }
-
-  const cBrightness = ((hRed * 299) + (hGreen * 587) + (hBlue * 114)) / 1000;
-  if (cBrightness > threshold) { return "#000000"; } else { return "#ffffff"; }
-}
-
-function generateRandomColor() {
-  const hexValues = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];
-  let hex = '#';
-
-  for (let i = 0; i < 6; i++) {
-    const index = Math.floor(Math.random() * hexValues.length)
-    hex += hexValues[index];
-  }
-  return hex;
-}
-
-function invertColor(hex) {
-  if (hex.indexOf('#') === 0) {
-    hex = hex.slice(1);
-  }
-  // convert 3-digit hex to 6-digits.
-  if (hex.length === 3) {
-    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
-  }
-  if (hex.length !== 6) {
-    throw new Error('Invalid HEX color.');
-  }
-  // invert color components
-  var r = (255 - parseInt(hex.slice(0, 2), 16)).toString(16),
-    g = (255 - parseInt(hex.slice(2, 4), 16)).toString(16),
-    b = (255 - parseInt(hex.slice(4, 6), 16)).toString(16);
-  // pad each with zeros and return
-  return '#' + padZero(r) + padZero(g) + padZero(b);
-}
-
-function padZero(str, len) {
-  len = len || 2;
-  var zeros = new Array(len).join('0');
-  return (zeros + str).slice(-len);
 }
 
 export default App;
