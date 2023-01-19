@@ -41,5 +41,9 @@ body {
   border: 3px solid white;
 }
 
+.scene-tooltip {
+  color: black !important;
+}
+
 @tailwind components;
 @tailwind utilities;

@@ -70,12 +70,13 @@ function App() {
 
           const material = new THREE.SpriteMaterial({ map: imgTexture });
           const sprite = new THREE.Sprite(material);
+          sprite.color = "transparent"
           sprite.scale.set(12, calcHeight);
           return sprite;
         }}
         linkAutoColorBy={d => data.nodes[d.source].id % GROUPS}
         linkWidth={1}
-        backgroundColor='white'
+        backgroundColor='transparent'
         nodeCanvasObject={(node, ctx, globalScale) => {
           const label = node.name;
           const fontSize = 4;
@@ -86,8 +87,6 @@ function App() {
           ctx.textAlign = 'center';
           ctx.textBaseline = 'middle';
           ctx.fillText(label, node.x, node.y);
-        }}
-        nodePointerAreaPaint={(node, color, ctx) => {
         }}
       />}
     </div>
