@@ -1,0 +1,132 @@
+[
+  {
+    "holding": {
+      "name": "Coca cola",
+      "image": "/company_logos/cocacola.png"
+    },
+    "subsidiaries": [
+      {
+        "name": "Sprite",
+        "image": "/company_logos/sprite.png"
+      },
+      {
+        "name": "Fanta",
+        "image": "/company_logos/fanta.png"
+      },
+      {
+        "name": "Dasani Purified Water",
+        "image": "/company_logos/dasani.png"
+      },
+      {
+        "name": "smartwater",
+        "image": "/company_logos/smartwater.png"
+      },
+      {
+        "name": "Minute Maid",
+        "image": "/company_logos/minutemaid.png"
+      },
+      {
+        "name": "innocent",
+        "image": "/company_logos/innocent.png"
+      },
+      {
+        "name": "Simply",
+        "image": "/company_logos/simply.png"
+      },
+      {
+        "name": "Georgia Coffee",
+        "image": "/company_logos/georgia.png"
+      },
+      {
+        "name": "Costa Coffee",
+        "image": "/company_logos/costa.png"
+      },
+      {
+        "name": "Fuze Tea",
+        "image": "/company_logos/fuze.png"
+      },
+      {
+        "name": "Honest",
+        "image": "/company_logos/honest.png"
+      },
+      {
+        "name": "fairlife",
+        "image": "/company_logos/fairlife.png"
+      },
+      {
+        "name": "Powerade",
+        "image": "/company_logos/powerade.png"
+      },
+      {
+        "name": "Ciel",
+        "image": "/company_logos/ciel.png"
+      },
+      {
+        "name": "Schweppes",
+        "image": "/company_logos/schweppes.png"
+      },
+      {
+        "name": "vitaminwater",
+        "image": "/company_logos/vitaminwater.png"
+      },
+      {
+        "name": "Gold Peak",
+        "image": "/company_logos/goldpeak.png"
+      },
+      {
+        "name": "Appletiser",
+        "image": "/company_logos/appletiser.png"
+      },
+      {
+        "name": "Topo chico",
+        "image": "/company_logos/topochico.png"
+      },
+      {
+        "name": "Aquarius",
+        "image": "/company_logos/aquarius.png"
+      },
+      {
+        "name": "AdeS",
+        "image": "/company_logos/ades.png"
+      },
+      {
+        "name": "Fresca",
+        "image": "/company_logos/fresca.webp"
+      },
+      {
+        "name": "I LOHAS",
+        "image": "/company_logos/ilohas.png"
+      },
+      {
+        "name": "Ayataka",
+        "image": "/company_logos/Ayataka.png"
+      },
+      {
+        "name": "Barq's",
+        "image": "/company_logos/barqs.png"
+      },
+      {
+        "name": "Dogadan",
+        "image": "/company_logos/dogadan.png"
+      },
+      {
+        "name": "Peace tea",
+        "image": "/company_logos/peacetea.png"
+      }
+    ]
+  },
+  {
+    "holding": {
+      "name": "Nestle",
+      "image": "/company_logos/nestle.png"
+    },
+    "subsidiaries": []
+  },
+  {
+    "holding": {
+      "name": "Pepsico",
+      "image": "/company_logos/pepsico.jpg"
+    },
+    "subsidiaries": []
+  }
+]

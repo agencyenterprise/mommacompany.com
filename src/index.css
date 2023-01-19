@@ -1,0 +1,45 @@
+@tailwind base;
+
+:root {
+  --primary: rebeccapurple;
+  --secondary: cornflowerblue;
+}
+
+html,
+body,
+#root {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+html {
+  overflow: hidden;
+}
+
+body {
+  overflow: hidden;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) white;
+  letter-spacing: -0.025em;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+  background: white;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--primary);
+  border: 3px solid white;
+}
+
+@tailwind components;
+@tailwind utilities;
