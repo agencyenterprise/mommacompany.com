@@ -21,8 +21,12 @@ function App() {
     for (let id = 0; id < dataJson[currentIndex].subsidiaries.length; id++) {
       const subsidiary = dataJson[currentIndex].subsidiaries[id];
 
-      const { width, height } = await getImageSize(subsidiary.image);
-      newData.nodes.push({ id: id, img: subsidiary.image, name: subsidiary.name, width, height })
+      try {
+        const { width, height } = await getImageSize(subsidiary.image);
+        newData.nodes.push({ id: id, img: subsidiary.image, name: subsidiary.name, width, height })
+      } catch {
+        newData.nodes.push({ id: id, name: subsidiary.name })
+      }
     }
 
     newData.links = [...Array(dataJson[currentIndex].subsidiaries.length).keys()]
