@@ -47,21 +47,9 @@ function App() {
       <header className='absolute top-0 left-0 right-0 z-10 flex flex-col gap-4 w-full p-4 bg-white justify-center'><h1 className='text-4xl text-center font-semibold text-slate-900'>Momma Company</h1>
         <div className='px-4 flex flex-row gap-8 justify-center'>
           {dataJson.map((company, index) => <div key={index} onClick={() => setCurrentIndex(index)} className={classNames('cursor-pointer rounded-full bg-slate-300 hover:brightness-110 active:bg-slate-400', currentIndex === index ? 'drop-shadow-[0_0px_5px_#000000]' : '')}>
-            {/* {company.holding.name} */}
-            <img src={company.holding.image} className='w-16 rounded-full' />
+            {company.holding.image ? <img src={company.holding.image} className='w-16 rounded-full' /> : company.holding.name}
           </div>)}
         </div></header>
-      {/* {data && <div className="col-md-35 w-full h-full mx-auto my-auto flex flex-row justify-center items-center">
-        <ReactBubbleChart onClick={() => { }} data={data} width={1280} height={720} center={{ x: 640, y: 360 }} forceStrength={0.03} />
-      </div>} */}
-      {/* <div className="chart"></div> */}
-      {/* <ReactRelationGraph
-        width={600}
-        height={600}
-        relations={data}
-        onClick={(relation) => console.log('clicked: ', relation.name)}
-        bgColor='white'
-      /> */}
       {data && <ForceGraph3D
         graphData={data}
         nodeThreeObject={({ img, width, height }) => {
