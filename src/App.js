@@ -11,6 +11,7 @@ function App() {
   const [data, setData] = useState();
   const [currentIndex, setCurrentIndex] = useState(0)
   const [loading, setLoading] = useState(true)
+  const graphRef = useRef(null)
 
   const loadData = async (currentIndex) => {
     setLoading(true)
@@ -61,33 +62,38 @@ function App() {
             {company.holding.image ? <img src={company.holding.image} className='w-16 rounded-full' /> : company.holding.name}
           </div>)}
         </div></header>
-      {!loading && <ForceGraph3D
-        graphData={data}
-        nodeThreeObject={({ img, width, height }) => {
-          var imgTexture = new THREE.TextureLoader().load(img);
-          const calcHeight = (12 / width) * height;
+      <div className='mt-[80px]'>
+        {!loading && <ForceGraph3D
+          ref={graphRef}
+          graphData={data}
+          nodeThreeObject={({ img, width, height }) => {
+            var imgTexture = new THREE.TextureLoader().load(img);
+            const calcHeight = (12 / width) * height;
 
-          const material = new THREE.SpriteMaterial({ map: imgTexture });
-          const sprite = new THREE.Sprite(material);
-          sprite.color = "transparent"
-          sprite.scale.set(12, calcHeight);
-          return sprite;
-        }}
-        linkAutoColorBy={d => data.nodes[d.source].id % GROUPS}
-        linkWidth={1}
-        backgroundColor='#00000000'
-        nodeCanvasObject={(node, ctx, globalScale) => {
-          const label = node.name;
-          const fontSize = 4;
-          ctx.font = `${fontSize}px Sans-Serif`;
-          const textWidth = ctx.measureText(label).width;
-          const bckgDimensions = [textWidth, fontSize].map(n => n + fontSize * 0.4); // some padding
+            const material = new THREE.SpriteMaterial({ map: imgTexture });
+            const sprite = new THREE.Sprite(material);
+            sprite.color = "transparent"
+            sprite.scale.set(12, calcHeight);
+            return sprite;
+          }}
+          linkAutoColorBy={d => data.nodes[d.source].id % GROUPS}
+          linkWidth={1}
+          backgroundColor='#00000000'
+          nodeCanvasObject={(node, ctx, globalScale) => {
+            const label = node.name;
+            const fontSize = 4;
+            ctx.font = `${fontSize}px Sans-Serif`;
+            const textWidth = ctx.measureText(label).width;
+            const bckgDimensions = [textWidth, fontSize].map(n => n + fontSize * 0.4); // some padding
 
-          ctx.textAlign = 'center';
-          ctx.textBaseline = 'middle';
-          ctx.fillText(label, node.x, node.y);
-        }}
-      />}
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(label, node.x, node.y);
+          }}
+          cooldownTicks={100}
+          onEngineStop={() => graphRef.current.zoomToFit(400)}
+        />}
+      </div>
       {loading && <h1 className='text-center my-auto mx-auto'>Loading...</h1>}
       <div className='absolute bottom-2 left-2 flex flex-row gap-2 md:gap-8'>
         <a href="https://wikipedia.org/" target="_blank">Data source</a>
