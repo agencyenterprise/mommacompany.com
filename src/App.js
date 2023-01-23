@@ -54,12 +54,12 @@ function App() {
     <div className="flex flex-col gap-4 h-screen justify-between w-full bg-white">
       <header className='absolute top-0 left-0 right-0 z-10 flex flex-col gap-4 w-full p-4 bg-white justify-center'>
         <div className='flex flex-row justify-center gap-2 items-center'>
-          <img src={logo} className='h-12 w-12' />
+          <img src={logo} className='h-12 w-12' alt="momma company logo" />
           <h1 className='text-4xl text-center font-semibold text-slate-900'>Momma Company</h1>
         </div>
         <div className='px-4 flex flex-row gap-8 justify-center'>
           {dataJson.map((company, index) => <div key={index} onClick={() => setCurrentIndex(index)} className={classNames('cursor-pointer rounded-full bg-slate-300 hover:brightness-110 active:bg-slate-400', currentIndex === index ? 'drop-shadow-[0_0px_5px_#000000]' : '')}>
-            {company.holding.image ? <img src={company.holding.image} className='w-16 rounded-full' /> : company.holding.name}
+            {company.holding.image ? <img src={company.holding.image} alt={`${company.holding.name} logo`} className='w-16 rounded-full' /> : company.holding.name}
           </div>)}
         </div></header>
       <div className='mt-[80px]'>
@@ -83,8 +83,6 @@ function App() {
             const label = node.name;
             const fontSize = 4;
             ctx.font = `${fontSize}px Sans-Serif`;
-            const textWidth = ctx.measureText(label).width;
-            const bckgDimensions = [textWidth, fontSize].map(n => n + fontSize * 0.4); // some padding
 
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
@@ -96,8 +94,8 @@ function App() {
       </div>
       {loading && <h1 className='text-center my-auto mx-auto'>Loading...</h1>}
       <div className='absolute bottom-2 left-2 flex flex-row gap-2 md:gap-8'>
-        <a href="https://wikipedia.org/" target="_blank">Data source</a>
-        <a href='https://github.com/agencyenterprise/mommacompany.com' target="_blank">We're open source, contribute on GitHub</a>
+        <a href="https://wikipedia.org/" rel="noreferrer" target="_blank">Data source</a>
+        <a href='https://github.com/agencyenterprise/mommacompany.com' rel="noreferrer" target="_blank">We're open source, contribute on GitHub</a>
       </div>
     </div>
   );
