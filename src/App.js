@@ -44,6 +44,23 @@ function App() {
     setLoading(false)
   }
 
+  const handleEngineStop = () => {
+    graphRef.current.zoomToFit(400)
+
+    setTimeout(() => {
+      // camera orbit
+      const distance = graphRef.current.cameraPosition().z;
+      let angle = 0;
+      setInterval(() => {
+        graphRef?.current?.cameraPosition({
+          x: distance * Math.sin(angle),
+          z: distance * Math.cos(angle)
+        });
+        angle += Math.PI / 600;
+      }, 10);
+    }, 500)
+  }
+
   useEffect(() => {
     loadData(currentIndex);
   }, [currentIndex])
@@ -72,13 +89,13 @@ function App() {
 
             const material = new THREE.SpriteMaterial({ map: imgTexture });
             const sprite = new THREE.Sprite(material);
-            sprite.color = "transparent"
             sprite.scale.set(12, calcHeight);
             return sprite;
           }}
+          nodeColor="transparent"
           linkAutoColorBy={d => data.nodes[d.source].id % GROUPS}
           linkWidth={1}
-          backgroundColor='#00000000'
+          backgroundColor='#FFFFFF'
           nodeCanvasObject={(node, ctx, globalScale) => {
             const label = node.name;
             const fontSize = 4;
@@ -89,7 +106,7 @@ function App() {
             ctx.fillText(label, node.x, node.y);
           }}
           cooldownTicks={100}
-          onEngineStop={() => graphRef.current.zoomToFit(400)}
+          onEngineStop={handleEngineStop}
         />}
       </div>
       {loading && <h1 className='text-center my-auto mx-auto'>Loading...</h1>}
