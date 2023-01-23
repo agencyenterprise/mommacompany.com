@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import dataJson from './data.json'
-import { ForceGraph2D, ForceGraph3D, ForceGraphVR, ForceGraphAR } from 'react-force-graph';
+import { ForceGraph3D } from 'react-force-graph';
 import * as THREE from 'three';
 import classNames from 'classnames';
 import { getImageSize } from 'react-image-size';
