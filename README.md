@@ -2,7 +2,7 @@
 
 Explore corporate ownership with Momma Company's interactive map. Learn more about the world's most powerful brands with up-to-date, public and proprietary data sources.
 
-## This project is primarily owned by AE Studio and Same Day Skunkworks
+## This project is primarily owned by [AE Studio](https://ae.studio/) and [Same Day Skunkworks](https://www.samedayskunkworks.com/)
 
 ## Available Scripts
 
