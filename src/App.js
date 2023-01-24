@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import classNames from 'classnames';
 import { getImageSize } from 'react-image-size';
 import logo from './assets/logo.svg'
+import SpriteText from 'three-spritetext'
 
 function App() {
 
@@ -12,6 +13,8 @@ function App() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [loading, setLoading] = useState(true)
   const graphRef = useRef(null)
+  const [autoOrbitEnabled, setAutoOrbitEnabled] = useState(false)
+  const [autoOrbitInterval, setAutoOrbitInterval] = useState(null)
 
   const loadData = async (currentIndex) => {
     setLoading(true)
@@ -47,22 +50,37 @@ function App() {
   const handleEngineStop = () => {
     graphRef.current.zoomToFit(400)
 
-    setTimeout(() => {
-      // camera orbit
-      const distance = graphRef.current.cameraPosition().z;
-      let angle = 0;
-      setInterval(() => {
-        graphRef?.current?.cameraPosition({
-          x: distance * Math.sin(angle),
-          z: distance * Math.cos(angle)
-        });
-        angle += Math.PI / 600;
-      }, 10);
-    }, 500)
+    if (autoOrbitEnabled) {
+      setTimeout(() => {
+        startAutoOrbit();
+      }, 500)
+    }
+  }
+
+  const startAutoOrbit = () => {
+    if (autoOrbitInterval) clearInterval(autoOrbitInterval)
+    // camera orbit
+    const distance = graphRef.current.cameraPosition().z;
+    let angle = 0;
+    setAutoOrbitInterval(setInterval(() => {
+      graphRef?.current?.cameraPosition({
+        x: distance * Math.sin(angle),
+        z: distance * Math.cos(angle)
+      });
+      angle += Math.PI / 600;
+    }, 10));
+  }
+
+  const stopAutoOrbit = () => {
+    clearInterval(autoOrbitInterval);
   }
 
   useEffect(() => {
+    stopAutoOrbit();
     loadData(currentIndex);
+    // setTimeout(() => {
+    //   startAutoOrbit();
+    // }, 500)
   }, [currentIndex])
 
   const GROUPS = 12;
@@ -83,14 +101,22 @@ function App() {
         {!loading && <ForceGraph3D
           ref={graphRef}
           graphData={data}
-          nodeThreeObject={({ img, width, height }) => {
-            var imgTexture = new THREE.TextureLoader().load(img);
-            const calcHeight = (12 / width) * height;
+          nodeThreeObject={({ img, width, height, name, color }) => {
+            if (img) {
+              var imgTexture = new THREE.TextureLoader().load(img);
+              const calcHeight = (12 / width) * height;
 
-            const material = new THREE.SpriteMaterial({ map: imgTexture });
-            const sprite = new THREE.Sprite(material);
-            sprite.scale.set(12, calcHeight);
-            return sprite;
+              const material = new THREE.SpriteMaterial({ map: imgTexture });
+              const sprite = new THREE.Sprite(material);
+              sprite.scale.set(12, calcHeight);
+              return sprite;
+            } else {
+              var randomColor = Math.floor(Math.random() * 16777215).toString(16);
+              const sprite = new SpriteText(name);
+              sprite.color = `#${randomColor}`;
+              sprite.textHeight = 4;
+              return sprite;
+            }
           }}
           nodeColor="transparent"
           linkAutoColorBy={d => data.nodes[d.source].id % GROUPS}
@@ -107,6 +133,8 @@ function App() {
           }}
           cooldownTicks={100}
           onEngineStop={handleEngineStop}
+          enableNavigationControls={!autoOrbitEnabled}
+          enableNodeDrag={!autoOrbitEnabled}
         />}
       </div>
       {loading && <h1 className='text-center my-auto mx-auto'>Loading...</h1>}
