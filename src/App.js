@@ -92,6 +92,7 @@ function App() {
           <img src={logo} className='h-12 w-12' alt="momma company logo" />
           <h1 className='text-4xl text-center font-semibold text-slate-900'>Momma Company</h1>
         </div>
+        <h1 className="text-center mx-auto w-full">Sometimes we want to ask a company “Who’s your momma?”</h1>
         <div className='px-4 flex flex-row gap-8 justify-center'>
           {dataJson.map((company, index) => <div key={index} onClick={() => setCurrentIndex(index)} className={classNames('cursor-pointer rounded-full bg-slate-300 hover:brightness-110 active:bg-slate-400', currentIndex === index ? 'drop-shadow-[0_0px_5px_#000000]' : '')}>
             {company.holding.image ? <img src={company.holding.image} alt={`${company.holding.name} logo`} className='w-16 rounded-full' /> : company.holding.name}
@@ -142,6 +143,7 @@ function App() {
         <a href="https://wikipedia.org/" rel="noreferrer" target="_blank">Data source</a>
         <a href='https://github.com/agencyenterprise/mommacompany.com' rel="noreferrer" target="_blank">We're open source, contribute on GitHub</a>
       </div>
+      <div className='absolute bottom-14 right-2 p-2'><h1>We build agency increasing tools like Momma company to empower people.</h1></div>
     </div>
   );
 }
